@@ -9,30 +9,6 @@ app.use(cors());
 app.use(express.urlencoded({extended: true}));
 app.use(express.json())
 
-const pins = [
-  {
-    id: 1,
-    lat: 32,
-    lng: -96,
-    title: "Random place 1",
-    description: "A random dumping ground"
-  },
-  {
-    id: 2,
-    lat: 31,
-    lng: -92,
-    title: "Random place 2",
-    description: "Another random dumping ground"
-  },
-  {
-    id: 3,
-    lat: 30,
-    lng: -88,
-    title: "Random place 3",
-    description: "Yet another random dumping ground"
-  },
-]
-
 app.get('/pins', (req, res) => {
   redis.get('pins', async (err, redisRes) => {
     if (redisRes) {
@@ -45,7 +21,7 @@ app.get('/pins', (req, res) => {
       console.log(dbRes.rows);
       console.log("Cache miss");
       redis.setex('pins', 30, JSON.stringify(dbRes.rows))
-      res.send(pins);
+      res.send(dbRes.rows);
     }
   });
 })
