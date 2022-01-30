@@ -7,7 +7,7 @@ const getAll = (req, res) => {
         if (redisRes) {
           console.log("Cache Hit");
           console.log(redisRes);
-          return redisRes;
+          res.send(redisRes);
         } 
         else {
             var query = "SELECT * FROM pins.pins;"
