@@ -3,7 +3,7 @@ const fs = require('fs');
 
 let data = fs.readFileSync('properties.json');
 let properties = JSON.parse(data);
-const conString = "postgres://" + properties["dbUserName"] + ":" + properties["dbPassword"] + "@localhost:5432/postgres";
+const conString = "postgres://" + properties["dbUserName"] + ":" + properties["dbPassword"] + "@localhost:5432/pins";
 var db = new pg.Client(conString);
 
 db.connect((err) => {
